@@ -1,8 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:dio/dio.dart' as prefix0;
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:net_ease_cloud_music/base/baseConstant.dart';
 import 'package:net_ease_cloud_music/base/baseColor.dart';
+import 'package:net_ease_cloud_music/utils/NetUtil.dart';
+
+import 'LoginRequest.dart';
 
 class LoginMobile extends StatefulWidget {
   @override
@@ -18,6 +22,8 @@ class LoginMobileState extends State<LoginMobile> {
   var controllerPassward = TextEditingController();
   String _mobileData = "";
   String _passwardData = "";
+  FocusNode userFocus = FocusNode();
+  FocusNode passwordFocus = FocusNode();
 
   @override
   void initState() {
@@ -37,6 +43,10 @@ class LoginMobileState extends State<LoginMobile> {
             color: colorBlack,
           ),
           onTap: () {
+            setState(() {
+              userFocus.unfocus();
+              passwordFocus.unfocus();
+            });
             Navigator.pop(context);
           },
         ),
@@ -52,6 +62,7 @@ class LoginMobileState extends State<LoginMobile> {
           Container(
             padding: EdgeInsets.all(20.0),
             child: TextField(
+              focusNode: userFocus,
               maxLength: 11,
               controller: controller,
               keyboardType: TextInputType.number,
@@ -79,6 +90,7 @@ class LoginMobileState extends State<LoginMobile> {
           Container(
             padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
             child: TextField(
+              focusNode:passwordFocus ,
               controller: controllerPassward,
               decoration: InputDecoration(
                   labelText: "密码",
@@ -114,10 +126,13 @@ class LoginMobileState extends State<LoginMobile> {
                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
               ),
               onPressed: () {
-                login().then((value){
-                  debugPrint(value.toString());
-                }).catchError((error){
-
+                Map<String,dynamic> loginData = {"phone":_mobileData,"password":_passwardData};
+                LoginRequest().login("login/cellphone", loginData).then((resp){
+                  if(resp.code == requestSuccess){
+                    Fluttertoast.showToast(msg: "登录成功");
+                    Navigator.pushNamedAndRemoveUntil(context, "mainPage", (route) => route == null);
+                    //Navigator.popAndPushNamed(context, "mainPage");
+                  }
                 });
               },
             ),
@@ -127,14 +142,4 @@ class LoginMobileState extends State<LoginMobile> {
     );
   }
 
-  Future login() async{
-    Dio dio = new Dio();
-    debugPrint("phone is $_mobileData");
-    FormData formData = FormData.fromMap({
-      "phone":_mobileData,
-      "password":_passwardData
-    });
-    var response = await dio.post(baseUrl + "login/cellphone",data:formData);
-    return response;
-  }
 }

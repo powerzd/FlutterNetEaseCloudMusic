@@ -8,7 +8,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="net_ease_cloud_music"
+        android:label="网易云音乐F"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

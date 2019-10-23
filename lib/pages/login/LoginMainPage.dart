@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:net_ease_cloud_music/base/baseColor.dart';
+import 'package:net_ease_cloud_music/pages/login/LoginMobile.dart';
 
 class LoginMainPage extends StatefulWidget {
   @override
@@ -36,7 +37,12 @@ class LoginMainPageState extends State<LoginMainPage> {
                       style: TextStyle(color: colorBase),
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, "loginMobile");
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginMobile()),
+                          (route) => route == null);
+                      //Navigator.pushNamed(context, "loginMobile");
                     },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0))),
