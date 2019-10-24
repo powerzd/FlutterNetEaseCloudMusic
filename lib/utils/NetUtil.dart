@@ -33,4 +33,16 @@ class NetUtil{
       error:toString(),
     ));
   }
+
+  Future<Map<String,dynamic>> get(String path,{CancelToken cancelToken}) async{
+    Response response = await dio.get(baseUrl + path,cancelToken: cancelToken);
+    debugPrint(response.toString());
+    if(response.statusCode == HttpStatus.ok || response.statusCode == HttpStatus.created){
+      return json.decode(response.toString());
+    }
+    return Future.error(DioError(
+      response: response,
+      error:toString(),
+    ));
+  }
 }

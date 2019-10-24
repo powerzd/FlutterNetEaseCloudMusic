@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:net_ease_cloud_music/base/baseConstant.dart';
 import 'package:net_ease_cloud_music/utils/NetUtil.dart';
+import 'package:net_ease_cloud_music/utils/SpUtil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'data/LoginResp.dart';
@@ -11,8 +13,11 @@ class LoginRequest{
     if(resp.code != requestSuccess){
       return Future.error("登录失败,请检查网络后重试");
     }
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setInt(LOGIN_ID, resp.account.id);
+//    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    SpUtil.putInt(LOGIN_ID, resp.account.id);
+    SpUtil.putString(AVATAR_PATH, resp.profile.avatarUrl);
+    SpUtil.putString(NICKNAME, resp.profile.nickname);
+    debugPrint("avator is ${resp.profile.avatarUrl}");
     return resp;
   }
 }
