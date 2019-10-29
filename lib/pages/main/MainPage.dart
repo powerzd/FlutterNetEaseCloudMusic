@@ -5,6 +5,7 @@ import 'package:net_ease_cloud_music/base/baseColor.dart';
 import 'package:net_ease_cloud_music/base/baseConstant.dart';
 import 'package:net_ease_cloud_music/pages/find/FindMain.dart';
 import 'package:net_ease_cloud_music/pages/find/FindPart.dart';
+import 'package:net_ease_cloud_music/pages/mine/MineMainPage.dart';
 import 'package:net_ease_cloud_music/utils/SpUtil.dart';
 
 class MainPage extends StatefulWidget {
@@ -57,7 +58,7 @@ class MainPageState extends State<MainPage>
       body: TabBarView(
         children: <Widget>[
           Container(
-            child: Text("1"),
+            child:MineMainPage(),
           ),
           Container(
            child: FindMain(),
@@ -151,7 +152,6 @@ class MainPageState extends State<MainPage>
       unselectedLabelColor: colorUnselected,
       unselectedLabelStyle: TextStyle(fontSize: 14.0),
       onTap: (index) {
-        //Fluttertoast.showToast(msg: "page is $index");
       },
     );
   }

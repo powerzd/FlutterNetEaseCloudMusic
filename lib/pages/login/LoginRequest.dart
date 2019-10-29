@@ -17,6 +17,7 @@ class LoginRequest{
     SpUtil.putInt(LOGIN_ID, resp.account.id);
     SpUtil.putString(AVATAR_PATH, resp.profile.avatarUrl);
     SpUtil.putString(NICKNAME, resp.profile.nickname);
+    SpUtil.putString(ID, resp.profile.userId.toString());
     debugPrint("avator is ${resp.profile.avatarUrl}");
     return resp;
   }

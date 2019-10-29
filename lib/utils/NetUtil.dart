@@ -2,8 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' as prefix0;
 import 'package:flutter/cupertino.dart';
 import 'package:net_ease_cloud_music/base/baseConstant.dart';
+import 'package:net_ease_cloud_music/utils/MutipleRequestUtil.dart';
+import 'package:net_ease_cloud_music/utils/RequestMethod.dart';
 
 class NetUtil{
   static final NetUtil _singleton = NetUtil.init();
@@ -44,5 +47,19 @@ class NetUtil{
       response: response,
       error:toString(),
     ));
+  }
+
+  Future<List<Response>> multipleRequest(List<MultipleRequestUtil> requests) async{
+
+    List<Future<Response>> futures = [];
+    for(int i = 0; i < requests.length; i++){
+      if(requests[i].requestMethod == RequestMethod.GET){
+        futures.add(dio.get(requests[i].requestPath));
+      }else if(requests[i].requestMethod == RequestMethod.POST){
+        futures.add(dio.post(requests[i].requestPath,data: requests[i].data));
+      }
+    }
+    List<Response> response = await Future.wait(futures);
+    return response;
   }
 }
