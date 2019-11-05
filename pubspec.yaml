@@ -54,6 +54,7 @@ flutter:
     - assets/image_drawer_bg.jpg
     - assets/image_drawer_bg2.jpg
     - assets/image_drawer_bg3.jpg
+    - assets/icon_message.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

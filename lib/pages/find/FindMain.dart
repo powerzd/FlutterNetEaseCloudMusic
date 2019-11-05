@@ -25,7 +25,7 @@ class FindMain extends StatefulWidget {
   }
 }
 
-class FindMainState extends State<FindMain> with TickerProviderStateMixin {
+class FindMainState extends State<FindMain> with TickerProviderStateMixin,AutomaticKeepAliveClientMixin {
   Future _future;
   List<String> _bannerUrls = [];
   List<Result> results = [];
@@ -43,7 +43,7 @@ class FindMainState extends State<FindMain> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    super.build(context);
     return FutureBuilder(
       future: _future,
       builder: (context, snap) {
@@ -228,4 +228,8 @@ class FindMainState extends State<FindMain> with TickerProviderStateMixin {
       musicData = newMusicResp.data;
     });
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

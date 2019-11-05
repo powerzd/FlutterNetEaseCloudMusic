@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:net_ease_cloud_music/base/baseColor.dart';
 import 'package:net_ease_cloud_music/base/baseConstant.dart';
+import 'package:net_ease_cloud_music/pages/drawer/DrawerMainPage.dart';
 import 'package:net_ease_cloud_music/pages/find/FindMain.dart';
 import 'package:net_ease_cloud_music/pages/find/FindPart.dart';
 import 'package:net_ease_cloud_music/pages/mine/MineMainPage.dart';
@@ -76,45 +77,7 @@ class MainPageState extends State<MainPage>
 
   Widget setDraw() {
     return Drawer(
-      child: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage(
-            "assets/image_drawer_bg3.jpg",
-          ),
-          fit: BoxFit.fill,
-        )),
-        child: Flex(
-          direction: Axis.vertical,
-          children: <Widget>[
-            Flexible(
-                child: ListView(
-              children: <Widget>[
-                Container(
-                  child: CircleAvatar(
-                    backgroundImage:
-                        NetworkImage(SpUtil.getString(AVATAR_PATH)),
-                    backgroundColor: colorWhite,
-                    radius: 35.0,
-                  ),
-                  alignment: Alignment.topLeft,
-                  margin: EdgeInsets.fromLTRB(20,20,0,0),
-                ),
-                Container(
-                  child:  Row(
-                    children: <Widget>[
-                      Text(SpUtil.getString(NICKNAME),style: TextStyle(fontWeight: FontWeight.bold),),
-                    ],
-                  ),
-                  margin: EdgeInsets.fromLTRB(20,10,0,0),
-                ),
-              ],
-            ))
-          ],
-        ),
-      ),
+      child:DrawerMainPage(),
     );
   }
 
