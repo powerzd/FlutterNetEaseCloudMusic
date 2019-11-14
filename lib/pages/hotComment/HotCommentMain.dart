@@ -183,8 +183,7 @@ class _HotCommentMainState extends State<HotCommentMain>
   }
 
   Future getHotComment() async {
-    Map<String, dynamic> commentJson =
-        await NetUtil.init().get("comment/hotwall/list");
+    Map<String, dynamic> commentJson = await NetUtil.init().get("comment/hotwall/list");
     _hotCommentResp = HotCommentResp.fromJson(commentJson);
   }
 

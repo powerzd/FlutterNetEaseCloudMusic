@@ -44,11 +44,14 @@ class DrawerMainPageState extends State<DrawerMainPage> {
             ),
             SizedBox(height: 20.0,),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 EasyBox(imgPath: "assets/icon_message.png",name: "我的消息",onTap: (){
                   Navigator.pushNamed(context, "message");
+                },),
+                EasyBox(imgPath: "assets/icon_friend.png",name: "我的好友",onTap: (){
+                  Navigator.pushNamed(context, "friend");
                 },),
                ],
             ),

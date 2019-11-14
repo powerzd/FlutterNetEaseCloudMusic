@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:net_ease_cloud_music/base/baseColor.dart';
+import 'package:net_ease_cloud_music/pages/friend/FriendMain.dart';
 import 'package:net_ease_cloud_music/pages/hotComment/HotCommentMain.dart';
 import 'package:net_ease_cloud_music/pages/login/LoginMainPage.dart';
 import 'package:net_ease_cloud_music/pages/login/LoginMobile.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         "loginMobile":(context) => LoginMobile(),
         "hotComment":(context) => HotCommentMain(),
         "message":(context) => MessageMain(),
+        "friend":(context) => FriendMain(),
       },
     );
   }

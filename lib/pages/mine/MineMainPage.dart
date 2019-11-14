@@ -130,7 +130,6 @@ class MineMainPageState extends State<MineMainPage> {
     playCollectLists.clear();
     playCreatedLists.clear();
     List<MultipleRequestUtil> list = [];
-    debugPrint("playLists is ${SpUtil.getString(ID)}");
     list.add(MultipleRequestUtil(RequestMethod.GET,
         baseUrl + "user/playlist?uid=${SpUtil.getString(ID)}"));
     List<Response> response = await NetUtil.init().multipleRequest(list);

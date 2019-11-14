@@ -16,7 +16,6 @@ class EasyBox extends StatelessWidget{
 
     double baseHeight = 20.0;
     double baseWidth = 20.0;
-    // TODO: implement build
 
     return GestureDetector(
       child:  Container(

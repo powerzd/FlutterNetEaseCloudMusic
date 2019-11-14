@@ -42,4 +42,10 @@ class StringUtils {
 
     return result;
   }
+
+  static String convertMillsToDate(int millSeconds){
+    DateTime millDate = DateTime.fromMillisecondsSinceEpoch(millSeconds);
+    String millStr = "${millDate.year}-${millDate.month}-${millDate.day}";
+    return millStr;
+  }
 }
