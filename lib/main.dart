@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:net_ease_cloud_music/base/baseColor.dart';
+import 'package:net_ease_cloud_music/pages/hotComment/HotCommentMain.dart';
 import 'package:net_ease_cloud_music/pages/login/LoginMainPage.dart';
 import 'package:net_ease_cloud_music/pages/login/LoginMobile.dart';
 import 'package:net_ease_cloud_music/pages/login/model/LoginInfoModel.dart';
 import 'package:net_ease_cloud_music/pages/main/MainPage.dart';
+import 'package:net_ease_cloud_music/pages/message/MessageMain.dart';
 import 'package:net_ease_cloud_music/pages/splash/SplashMain.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +28,8 @@ class MyApp extends StatelessWidget {
         "loginMain":(context) => LoginMainPage(),
         "mainPage":(context) => MainPage(),
         "loginMobile":(context) => LoginMobile(),
+        "hotComment":(context) => HotCommentMain(),
+        "message":(context) => MessageMain(),
       },
     );
   }

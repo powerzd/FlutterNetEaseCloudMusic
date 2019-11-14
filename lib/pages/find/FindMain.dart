@@ -171,7 +171,7 @@ class FindMainState extends State<FindMain> with TickerProviderStateMixin,Automa
             ],
           ),
           Container(
-            height: 135.0,
+            height: 150.0,
             margin: EdgeInsets.fromLTRB(15, 5, 15, 30),
             child: TabBarView(
               children: <Widget>[

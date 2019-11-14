@@ -48,28 +48,6 @@ class LoginMainPageState extends State<LoginMainPage> {
                         borderRadius: BorderRadius.all(Radius.circular(20.0))),
                   ),
                 ),
-
-                Container(
-                  width: 200.0,
-                  child: FlatButton(
-                    color: colorWhite,
-                    child: Text(
-                      "手机号登录",
-                      style: TextStyle(color: colorBase),
-                    ),
-                    onPressed: () {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LoginMobile()),
-                              (route) => route == null);
-                      //Navigator.pushNamed(context, "loginMobile");
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                  ),
-                ),
-
                 Text(
                   "此app仅供学习和参考，不可用于任何商业用途",
                   style: TextStyle(color: colorWhite, fontSize: 12.0),

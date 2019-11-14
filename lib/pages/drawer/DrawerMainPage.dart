@@ -19,11 +19,14 @@ class DrawerMainPageState extends State<DrawerMainPage> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+      padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
       decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/image_drawer_bg3.jpg"),
-              fit: BoxFit.fill)),
+        gradient: LinearGradient(
+          colors: [colorHotCommentColor,colorWhite],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        )
+      ),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +48,7 @@ class DrawerMainPageState extends State<DrawerMainPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 EasyBox(imgPath: "assets/icon_message.png",name: "我的消息",onTap: (){
-
+                  Navigator.pushNamed(context, "message");
                 },),
                ],
             ),

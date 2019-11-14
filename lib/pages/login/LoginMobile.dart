@@ -131,7 +131,6 @@ class LoginMobileState extends State<LoginMobile> {
                   if(resp.code == requestSuccess){
                     Fluttertoast.showToast(msg: "登录成功");
                     Navigator.pushNamedAndRemoveUntil(context, "mainPage", (route) => route == null);
-                    //Navigator.popAndPushNamed(context, "mainPage");
                   }
                 });
               },

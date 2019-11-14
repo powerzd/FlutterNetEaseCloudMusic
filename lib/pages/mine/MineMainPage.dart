@@ -10,6 +10,7 @@ import 'package:net_ease_cloud_music/utils/MutipleRequestUtil.dart';
 import 'package:net_ease_cloud_music/utils/NetUtil.dart';
 import 'package:net_ease_cloud_music/utils/RequestMethod.dart';
 import 'package:net_ease_cloud_music/utils/SpUtil.dart';
+import 'package:net_ease_cloud_music/widget/HorizontalBox.dart';
 
 class MineMainPage extends StatefulWidget {
   @override
@@ -49,51 +50,18 @@ class MineMainPageState extends State<MineMainPage> {
               return Scrollbar(
                 child: ListView(
                   children: <Widget>[
-                    ExpansionTile(
-                      title: Text(
-                        "创建的歌单(${playCreatedLists.length})",
-                        style: BaseStyles.styleBaseTitle,
-                      ),
-                      children: playCreatedLists.length > 0
-                          ? playCreatedLists.map<Widget>((value) {
-                              return ListTile(
-                                leading: Container(
-                                  height: 50.0,
-                                  width: 50.0,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(5.0)),
-                                      image: DecorationImage(
-                                        image: NetworkImage(value.coverImgUrl),
-                                      )),
-                                ),
-                                title: Text(value.name),
-                                subtitle: Text("${value.trackCount}首"),
-                              );
-                            }).toList()
-                          : <Widget>[Container()],
-                    ),
-                    ExpansionTile(
-                      title: Text("收藏的歌单(${playCollectLists.length})", style: BaseStyles.styleBaseTitle),
-                      children: playCollectLists.length > 0
-                          ? playCollectLists.map<Widget>((value) {
-                              return ListTile(
-                                leading: Container(
-                                  height: 50.0,
-                                  width: 50.0,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(5.0)),
-                                      image: DecorationImage(
-                                        image: NetworkImage(value.coverImgUrl),
-                                      )),
-                                ),
-                                title: Text(value.name),
-                                subtitle: Text("${value.trackCount}首"),
-                              );
-                            }).toList()
-                          : <Widget>[Container()],
-                    ),
+                    HorizontalBox(icon: Icons.music_note,title: "本地音乐",),
+                    Container(margin: EdgeInsets.fromLTRB(50, 0, 0, 0),child: Divider(height: 1.0,color: colorUnselected,),),
+                    HorizontalBox(icon: Icons.queue_music,title: "最近播放",sub:"20",),
+                    Container(margin: EdgeInsets.fromLTRB(50, 0, 0, 0),child: Divider(height: 1.0,color: colorUnselected,),),
+                    HorizontalBox(icon: Icons.file_download,title: "下载管理",sub:"20",),
+                    Container(margin: EdgeInsets.fromLTRB(50, 0, 0, 0),child: Divider(height: 1.0,color: colorUnselected,),),
+                    HorizontalBox(icon: Icons.blur_circular,title: "我的电台",sub:"20",),
+                    Container(margin: EdgeInsets.fromLTRB(50, 0, 0, 0),child: Divider(height: 1.0,color: colorUnselected,),),
+                    HorizontalBox(icon: Icons.collections_bookmark,title: "我的收藏",sub:"20",),
+                    Container(height: 5.0,color: colorDivide,),
+                    getCreatedMusic(),
+                    getCollectedMusic(),
                   ],
                 ),
               );
@@ -105,6 +73,57 @@ class MineMainPageState extends State<MineMainPage> {
         );
       },
     ));
+  }
+
+  Widget getCreatedMusic() {
+    return ExpansionTile(
+      title: Text(
+        "创建的歌单(${playCreatedLists.length})",
+        style: BaseStyles.styleBaseTitle,
+      ),
+      children: playCreatedLists.length > 0
+          ? playCreatedLists.map<Widget>((value) {
+        return ListTile(
+          leading: Container(
+            height: 50.0,
+            width: 50.0,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(
+                    Radius.circular(5.0)),
+                image: DecorationImage(
+                  image: NetworkImage(value.coverImgUrl),
+                )),
+          ),
+          title: Text(value.name),
+          subtitle: Text("${value.trackCount}首"),
+        );
+      }).toList()
+          : <Widget>[Container()],
+    );
+  }
+
+  Widget getCollectedMusic(){
+    return  ExpansionTile(
+      title: Text("收藏的歌单(${playCollectLists.length})", style: BaseStyles.styleBaseTitle),
+      children: playCollectLists.length > 0
+          ? playCollectLists.map<Widget>((value) {
+        return ListTile(
+          leading: Container(
+            height: 50.0,
+            width: 50.0,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(
+                    Radius.circular(5.0)),
+                image: DecorationImage(
+                  image: NetworkImage(value.coverImgUrl),
+                )),
+          ),
+          title: Text(value.name),
+          subtitle: Text("${value.trackCount}首"),
+        );
+      }).toList()
+          : <Widget>[Container()],
+    );
   }
 
   Future getMineInfo() async {
