@@ -59,6 +59,12 @@ class LoginMobileState extends State<LoginMobile> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
+          Offstage(
+            offstage: true,
+            child: CircularProgressIndicator(
+              backgroundColor: colorBase,
+            ),
+          ),
           Container(
             padding: EdgeInsets.all(20.0),
             child: TextField(
@@ -70,15 +76,6 @@ class LoginMobileState extends State<LoginMobile> {
                   labelText: "手机号",
                   prefixText: "+ 86 ",
                   hintText: "请输入手机号码",
-                  suffixIcon: (_mobileData.length != 0) ? IconButton(
-                    icon: Icon(Icons.clear),
-                    onPressed: (){
-                      setState(() {
-                        _mobileData = "";
-                        controller.clear();
-                      });
-                    },
-                  ) : null
               ),
               onChanged: (value) {
                 setState(() {
@@ -96,15 +93,6 @@ class LoginMobileState extends State<LoginMobile> {
                   labelText: "密码",
                   prefixText: " ",
                   hintText: "请输入密码",
-                  suffixIcon: (_passwardData.length != 0) ? IconButton(
-                    icon: Icon(Icons.clear),
-                    onPressed: (){
-                      setState(() {
-                        _passwardData = "";
-                        controllerPassward.clear();
-                      });
-                    },
-                  ) : null
               ),
               onChanged: (value){
                 setState(() {

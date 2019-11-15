@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:net_ease_cloud_music/base/baseColor.dart';
 import 'package:net_ease_cloud_music/pages/login/LoginMobile.dart';
+import 'package:net_ease_cloud_music/utils/CloudRoundButton.dart';
 
 class LoginMainPage extends StatefulWidget {
   @override
@@ -28,25 +29,19 @@ class LoginMainPageState extends State<LoginMainPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                Container(
+                CloudRoundButton(
                   width: 200.0,
-                  child: FlatButton(
-                    color: colorWhite,
-                    child: Text(
-                      "手机号登录",
-                      style: TextStyle(color: colorBase),
-                    ),
-                    onPressed: () {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LoginMobile()),
-                          (route) => route == null);
-                      //Navigator.pushNamed(context, "loginMobile");
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                  ),
+                  title: "手机登录",
+                  onTap: () {
+                    Navigator.pushNamed(context, "loginMobile");
+                  },
+                ),
+                CloudRoundButton(
+                  width: 200.0,
+                  title: "邮箱登录",
+                  onTap: () {
+                    Navigator.pushNamed(context, "loginEmail");
+                  },
                 ),
                 Text(
                   "此app仅供学习和参考，不可用于任何商业用途",

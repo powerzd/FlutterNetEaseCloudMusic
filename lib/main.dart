@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:net_ease_cloud_music/base/baseColor.dart';
 import 'package:net_ease_cloud_music/pages/friend/FriendMain.dart';
 import 'package:net_ease_cloud_music/pages/hotComment/HotCommentMain.dart';
+import 'package:net_ease_cloud_music/pages/login/LoginEmailMain.dart';
 import 'package:net_ease_cloud_music/pages/login/LoginMainPage.dart';
 import 'package:net_ease_cloud_music/pages/login/LoginMobile.dart';
 import 'package:net_ease_cloud_music/pages/login/model/LoginInfoModel.dart';
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
       title: '网易云音乐F',
       theme: ThemeData(
         primaryColor: colorBase,
+        iconTheme: IconThemeData(
+          color: colorBlack,
+        ),
       ),
       home:SplashMain(),
       routes: {
@@ -32,6 +36,7 @@ class MyApp extends StatelessWidget {
         "hotComment":(context) => HotCommentMain(),
         "message":(context) => MessageMain(),
         "friend":(context) => FriendMain(),
+        "loginEmail":(context) => LoginEmailMain(),
       },
     );
   }

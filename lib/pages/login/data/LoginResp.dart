@@ -4,8 +4,10 @@ class LoginResp {
     int code;
     int loginType;
     Profile profile;
+    String message;
 
-    LoginResp({this.account, this.bindings, this.code, this.loginType, this.profile});
+
+    LoginResp({this.account, this.bindings, this.code, this.loginType, this.profile,this.message});
 
     factory LoginResp.fromJson(Map<String, dynamic> json) {
         return LoginResp(
@@ -14,12 +16,14 @@ class LoginResp {
             code: json['code'],
             loginType: json['loginType'],
             profile: json['profile'] != null ? Profile.fromJson(json['profile']) : null,
+            message: json['message'],
         );
     }
 
     Map<String, dynamic> toJson() {
         final Map<String, dynamic> data = new Map<String, dynamic>();
         data['code'] = this.code;
+        data['message'] = this.message;
         data['loginType'] = this.loginType;
         if (this.account != null) {
             data['account'] = this.account.toJson();
