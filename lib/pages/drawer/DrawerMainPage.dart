@@ -32,10 +32,15 @@ class DrawerMainPageState extends State<DrawerMainPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SizedBox(height: 20.0,),
-            CircleAvatar(
-              backgroundImage: NetworkImage(SpUtil.getString(AVATAR_PATH)),
-              backgroundColor: colorWhite,
-              radius: 35.0,
+            GestureDetector(
+              child:CircleAvatar(
+                backgroundImage: NetworkImage(SpUtil.getString(AVATAR_PATH)),
+                backgroundColor: colorWhite,
+                radius: 35.0,
+              ),
+              onTap: (){
+                Navigator.pushNamed(context, "userDetail");
+              },
             ),
             SizedBox(height: 10.0,),
             Text(

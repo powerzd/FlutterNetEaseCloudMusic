@@ -9,6 +9,7 @@ import 'package:net_ease_cloud_music/pages/login/model/LoginInfoModel.dart';
 import 'package:net_ease_cloud_music/pages/main/MainPage.dart';
 import 'package:net_ease_cloud_music/pages/message/MessageMain.dart';
 import 'package:net_ease_cloud_music/pages/splash/SplashMain.dart';
+import 'package:net_ease_cloud_music/pages/user/UserDetailMain.dart';
 import 'package:provider/provider.dart';
 
 void main(){
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
         "message":(context) => MessageMain(),
         "friend":(context) => FriendMain(),
         "loginEmail":(context) => LoginEmailMain(),
+        "userDetail":(context) => UserDetailMain(),
       },
     );
   }

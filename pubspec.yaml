@@ -59,6 +59,7 @@ flutter:
     - assets/icon_friend.png
     - assets/icon_boy.png
     - assets/icon_girl.png
+    - assets/icon_rank.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
