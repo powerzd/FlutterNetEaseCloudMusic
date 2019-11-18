@@ -6,10 +6,12 @@ import 'package:net_ease_cloud_music/base/BaseStyles.dart';
 import 'package:net_ease_cloud_music/base/baseColor.dart';
 import 'package:net_ease_cloud_music/base/baseConstant.dart';
 import 'package:net_ease_cloud_music/pages/mine/data/PlayListData.dart';
+import 'package:net_ease_cloud_music/pages/mine/data/SubCountResp.dart';
 import 'package:net_ease_cloud_music/utils/MutipleRequestUtil.dart';
 import 'package:net_ease_cloud_music/utils/NetUtil.dart';
 import 'package:net_ease_cloud_music/utils/RequestMethod.dart';
 import 'package:net_ease_cloud_music/utils/SpUtil.dart';
+import 'package:net_ease_cloud_music/widget/ExpansionList.dart';
 import 'package:net_ease_cloud_music/widget/HorizontalBox.dart';
 
 class MineMainPage extends StatefulWidget {
@@ -25,6 +27,7 @@ class MineMainPageState extends State<MineMainPage> {
   List<Playlist> playCreatedLists = [];
   List<Playlist> playCollectLists = [];
   String userId;
+  SubCountResp _subCountResp;
 
   @override
   void initState() {
@@ -50,16 +53,27 @@ class MineMainPageState extends State<MineMainPage> {
               return Scrollbar(
                 child: ListView(
                   children: <Widget>[
-                    HorizontalBox(icon: Icons.music_note,title: "本地音乐",),
-                    Container(margin: EdgeInsets.fromLTRB(50, 0, 0, 0),child: Divider(height: 1.0,color: colorUnselected,),),
-                    HorizontalBox(icon: Icons.queue_music,title: "最近播放",sub:"20",),
-                    Container(margin: EdgeInsets.fromLTRB(50, 0, 0, 0),child: Divider(height: 1.0,color: colorUnselected,),),
-                    HorizontalBox(icon: Icons.file_download,title: "下载管理",sub:"20",),
-                    Container(margin: EdgeInsets.fromLTRB(50, 0, 0, 0),child: Divider(height: 1.0,color: colorUnselected,),),
-                    HorizontalBox(icon: Icons.blur_circular,title: "我的电台",sub:"20",),
-                    Container(margin: EdgeInsets.fromLTRB(50, 0, 0, 0),child: Divider(height: 1.0,color: colorUnselected,),),
-                    HorizontalBox(icon: Icons.collections_bookmark,title: "我的收藏",sub:"20",),
-                    Container(height: 5.0,color: colorDivide,),
+                    HorizontalBox(
+                      icon: Icons.blur_circular,
+                      title: "我的电台",
+                      sub: "20",
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(50, 0, 0, 0),
+                      child: Divider(
+                        height: 1.0,
+                        color: colorUnselected,
+                      ),
+                    ),
+                    HorizontalBox(
+                      icon: Icons.collections_bookmark,
+                      title: "我的收藏",
+                      sub: "20",
+                    ),
+                    Container(
+                      height: 5.0,
+                      color: colorDivide,
+                    ),
                     getCreatedMusic(),
                     getCollectedMusic(),
                   ],
@@ -76,52 +90,89 @@ class MineMainPageState extends State<MineMainPage> {
   }
 
   Widget getCreatedMusic() {
-    return ExpansionTile(
+    return CloudExpansionTile(
       title: Text(
         "创建的歌单(${playCreatedLists.length})",
         style: BaseStyles.styleBaseTitle,
       ),
+      leading: SizedBox(
+        width: 72,
+        child: Row(
+          children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text("新建歌单"),
+                        content: TextField(
+                          decoration: InputDecoration(hintText: "请输入歌单名称"),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        ),
+                        actions: <Widget>[
+                          FlatButton(
+                            child: Text("取消"),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                          FlatButton(
+                            child: Text("确定"),
+                            onPressed: () {},
+                          )
+                        ],
+                      );
+                    });
+              },
+            ),
+            Icon(Icons.more_vert),
+          ],
+        ),
+      ),
       children: playCreatedLists.length > 0
           ? playCreatedLists.map<Widget>((value) {
-        return ListTile(
-          leading: Container(
-            height: 50.0,
-            width: 50.0,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(
-                    Radius.circular(5.0)),
-                image: DecorationImage(
-                  image: NetworkImage(value.coverImgUrl),
-                )),
-          ),
-          title: Text(value.name),
-          subtitle: Text("${value.trackCount}首"),
-        );
-      }).toList()
+              return ListTile(
+                leading: Container(
+                  height: 50.0,
+                  width: 50.0,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                      image: DecorationImage(
+                        image: NetworkImage(value.coverImgUrl),
+                      )),
+                ),
+                title: Text(value.name),
+                subtitle: Text("${value.trackCount}首"),
+              );
+            }).toList()
           : <Widget>[Container()],
     );
   }
 
-  Widget getCollectedMusic(){
-    return  ExpansionTile(
-      title: Text("收藏的歌单(${playCollectLists.length})", style: BaseStyles.styleBaseTitle),
+  Widget getCollectedMusic() {
+    return CloudExpansionTile(
+      title: Text("收藏的歌单(${playCollectLists.length})",
+          style: BaseStyles.styleBaseTitle),
       children: playCollectLists.length > 0
           ? playCollectLists.map<Widget>((value) {
-        return ListTile(
-          leading: Container(
-            height: 50.0,
-            width: 50.0,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(
-                    Radius.circular(5.0)),
-                image: DecorationImage(
-                  image: NetworkImage(value.coverImgUrl),
-                )),
-          ),
-          title: Text(value.name),
-          subtitle: Text("${value.trackCount}首"),
-        );
-      }).toList()
+              return ListTile(
+                leading: Container(
+                  height: 50.0,
+                  width: 50.0,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                      image: DecorationImage(
+                        image: NetworkImage(value.coverImgUrl),
+                      )),
+                ),
+                title: Text(value.name),
+                subtitle: Text("${value.trackCount}首"),
+              );
+            }).toList()
           : <Widget>[Container()],
     );
   }
@@ -132,15 +183,15 @@ class MineMainPageState extends State<MineMainPage> {
     List<MultipleRequestUtil> list = [];
     list.add(MultipleRequestUtil(RequestMethod.GET,
         baseUrl + "user/playlist?uid=${SpUtil.getString(ID)}"));
+    list.add(MultipleRequestUtil(RequestMethod.GET, baseUrl + 'user/subcount'));
     List<Response> response = await NetUtil.init().multipleRequest(list);
     PlayListData playListData =
         PlayListData.fromJson(json.decode(response[0].toString()));
-    setState(() {
-      for (int i = 0; i < playListData.playlist.length; i++) {
-        (playListData.playlist[i].creator.userId.toString() == userId)
-            ? playCreatedLists.add(playListData.playlist[i])
-            : playCollectLists.add(playListData.playlist[i]);
-      }
-    });
+    _subCountResp = SubCountResp.fromJson(json.decode(response[1].toString()));
+    for (int i = 0; i < playListData.playlist.length; i++) {
+      (playListData.playlist[i].creator.userId.toString() == userId)
+          ? playCreatedLists.add(playListData.playlist[i])
+          : playCollectLists.add(playListData.playlist[i]);
+    }
   }
 }

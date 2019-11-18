@@ -1,10 +1,16 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:net_ease_cloud_music/base/BaseStyles.dart';
 import 'package:net_ease_cloud_music/base/baseColor.dart';
 import 'package:net_ease_cloud_music/base/baseConstant.dart';
 import 'package:net_ease_cloud_music/pages/user/UserDetailResp.dart';
+import 'package:net_ease_cloud_music/pages/user/UserDynamicInfoResp.dart';
+import 'package:net_ease_cloud_music/utils/MutipleRequestUtil.dart';
 import 'package:net_ease_cloud_music/utils/NetUtil.dart';
+import 'package:net_ease_cloud_music/utils/RequestMethod.dart';
 import 'package:net_ease_cloud_music/utils/SpUtil.dart';
 import 'package:net_ease_cloud_music/widget/LoadingProgress.dart';
 import 'package:net_ease_cloud_music/widget/NoDataPage.dart';
@@ -21,6 +27,7 @@ class _UserDetailMain extends State<UserDetailMain>
     with SingleTickerProviderStateMixin {
   Future _future;
   UserDetailResp _detailResp;
+  UserDynamicInfoResp _dynamicInfoResp;
   final double _appBarHeight = 256.0;
   TabController _tabController;
 
@@ -120,8 +127,13 @@ class _UserDetailMain extends State<UserDetailMain>
               labelColor: colorBase,
               unselectedLabelColor: colorBlack,
             ),
+
+//            SingleChildScrollView(
+//              height: double.infinity,
+//              child: tabBarView(),
+//            )
             Container(
-              height: 200.0,
+              height: MediaQuery.of(context).size.height,
               child: tabBarView(),
             )
           ]),
@@ -133,8 +145,10 @@ class _UserDetailMain extends State<UserDetailMain>
   Widget tabBarView() {
     return TabBarView(
       children: <Widget>[
+        //Text("1344"),
         infoList(),
-        //dynamicList(),
+        //Text("1344"),
+        dynamicList(),
       ],
       controller: _tabController,
     );
@@ -159,18 +173,32 @@ class _UserDetailMain extends State<UserDetailMain>
   }
 
   Widget dynamicList() {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        return Container();
-      },
+    return SingleChildScrollView(
+      child:
+        ListView.builder(
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text("12344"),
+            );
+          },
+          itemCount: _dynamicInfoResp.size,
+          physics: NeverScrollableScrollPhysics(),
+        ),
     );
   }
 
   Future getUserDetailInfo() async {
-    Map<String, dynamic> userInfoJson =
-        await NetUtil.init().get("user/detail?uid=${SpUtil.getInt(LOGIN_ID)}");
-    _detailResp = UserDetailResp.fromJson(userInfoJson);
-    print(_detailResp.code);
+    List<MultipleRequestUtil> requestLists = [];
+    requestLists.add(MultipleRequestUtil(RequestMethod.GET,
+        "${baseUrl}user/detail?uid=${SpUtil.getInt(LOGIN_ID)}"));
+    requestLists.add(MultipleRequestUtil(RequestMethod.GET,
+        "${baseUrl}user/event?uid=${SpUtil.getInt(LOGIN_ID)}"));
+    List<Response> responseList =
+        await NetUtil.init().multipleRequest(requestLists);
+    _detailResp =
+        UserDetailResp.fromJson(json.decode(responseList[0].toString()));
+    _dynamicInfoResp =
+        UserDynamicInfoResp.fromJson(json.decode(responseList[1].toString()));
   }
 }
