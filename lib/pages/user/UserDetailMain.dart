@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,7 @@ import 'package:net_ease_cloud_music/utils/MutipleRequestUtil.dart';
 import 'package:net_ease_cloud_music/utils/NetUtil.dart';
 import 'package:net_ease_cloud_music/utils/RequestMethod.dart';
 import 'package:net_ease_cloud_music/utils/SpUtil.dart';
-import 'package:net_ease_cloud_music/widget/LoadingProgress.dart';
+import 'package:net_ease_cloud_music/widget/CloudLoadingProgress.dart';
 import 'package:net_ease_cloud_music/widget/NoDataPage.dart';
 
 class UserDetailMain extends StatefulWidget {
@@ -53,11 +52,11 @@ class _UserDetailMain extends State<UserDetailMain>
               }
             case ConnectionState.waiting:
               {
-                return LoadingProgress();
+                return CloudLoadingProgress();
               }
             case ConnectionState.active:
               {
-                return LoadingProgress();
+                return CloudLoadingProgress();
               }
             case ConnectionState.done:
               {

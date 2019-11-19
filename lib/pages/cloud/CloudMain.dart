@@ -6,7 +6,7 @@ import 'package:net_ease_cloud_music/utils/MutipleRequestUtil.dart';
 import 'package:net_ease_cloud_music/utils/RequestMethod.dart';
 import 'package:net_ease_cloud_music/utils/SpUtil.dart';
 import 'package:net_ease_cloud_music/utils/StringUtils.dart';
-import 'package:net_ease_cloud_music/widget/LoadingProgress.dart';
+import 'package:net_ease_cloud_music/widget/CloudLoadingProgress.dart';
 import 'package:net_ease_cloud_music/widget/NoDataPage.dart';
 
 class CloudMain extends StatefulWidget {
@@ -54,11 +54,11 @@ class CloudMainState extends State<CloudMain>
             }
           case ConnectionState.waiting:
             {
-              return LoadingProgress();
+              return CloudLoadingProgress();
             }
           case ConnectionState.active:
             {
-              return LoadingProgress();
+              return CloudLoadingProgress();
             }
           case ConnectionState.done:
             {

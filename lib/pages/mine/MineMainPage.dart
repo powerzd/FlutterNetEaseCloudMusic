@@ -182,7 +182,7 @@ class MineMainPageState extends State<MineMainPage> {
     playCreatedLists.clear();
     List<MultipleRequestUtil> list = [];
     list.add(MultipleRequestUtil(RequestMethod.GET,
-        baseUrl + "user/playlist?uid=${SpUtil.getString(ID)}"));
+        baseUrl + "user/playlist?uid=90296490"));
     list.add(MultipleRequestUtil(RequestMethod.GET, baseUrl + 'user/subcount'));
     List<Response> response = await NetUtil.init().multipleRequest(list);
     PlayListData playListData =

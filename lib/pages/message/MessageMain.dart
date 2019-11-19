@@ -9,7 +9,7 @@ import 'package:net_ease_cloud_music/pages/message/CommentResp.dart';
 import 'package:net_ease_cloud_music/pages/message/MessageResp.dart';
 import 'package:net_ease_cloud_music/pages/message/MessgaePrivateLetterResp.dart';
 import 'package:net_ease_cloud_music/utils/StringUtils.dart';
-import 'package:net_ease_cloud_music/widget/FutureBuilderBox.dart';
+import 'package:net_ease_cloud_music/widget/CloudFutureBuilder.dart';
 
 
 class MessageMain extends StatefulWidget {
@@ -48,7 +48,7 @@ class _MessageMainState extends State<MessageMain>
         ),
         bottom: showTabBar(),
       ),
-      body: FutureBuilderBox(future: _future,widget: Center(),)
+      body: Center(),
     );
   }
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:net_ease_cloud_music/base/baseConstant.dart';
 import 'package:net_ease_cloud_music/pages/login/LoginMainPage.dart';
 import 'package:net_ease_cloud_music/pages/main/MainPage.dart';
+import 'package:net_ease_cloud_music/utils/NetUtil.dart';
 import 'package:net_ease_cloud_music/utils/SpUtil.dart';
 
 class SplashMain extends StatefulWidget{
@@ -20,6 +21,7 @@ class SplashMainState extends State<SplashMain>{
   void initState() {
     // TODO: implement initState
     super.initState();
+    NetUtil.initCookie();
     initUser().then((value){
       if(value == 1){
         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainPage()),(route) => route == null);

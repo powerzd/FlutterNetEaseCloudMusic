@@ -19,7 +19,7 @@ class BaseStyles{
   );
 
   static const TextStyle styleWhiteHuge = TextStyle(
-      fontSize: 22.0,
+      fontSize: 26.0,
       fontWeight: FontWeight.bold,
       color: colorWhite
   );
@@ -28,6 +28,11 @@ class BaseStyles{
       fontSize: 16.0,
       fontWeight: FontWeight.bold,
       color: colorBlack
+  );
+
+  static const TextStyle styleSubTitle = TextStyle(
+    fontSize: 12.0,
+    color: colorBlack
   );
 
 }

@@ -4,7 +4,7 @@ import 'package:net_ease_cloud_music/base/baseColor.dart';
 import 'package:net_ease_cloud_music/base/baseConstant.dart';
 import 'package:net_ease_cloud_music/pages/login/LoginRequest.dart';
 import 'package:net_ease_cloud_music/utils/CloudRoundButton.dart';
-import 'package:net_ease_cloud_music/widget/LoadingProgress.dart';
+import 'package:net_ease_cloud_music/widget/CloudLoadingProgress.dart';
 
 class LoginEmailMain extends StatefulWidget {
   @override
@@ -34,7 +34,7 @@ class _LoginEmailMain extends State<LoginEmailMain> {
               alignment: Alignment.center,
               child: Offstage(
                 offstage: _offstage,
-                child: LoadingProgress(),
+                child: CloudLoadingProgress(),
               ),
             ),
             Column(

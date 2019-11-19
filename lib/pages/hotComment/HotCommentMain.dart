@@ -5,7 +5,7 @@ import 'package:net_ease_cloud_music/base/baseColor.dart';
 import 'package:net_ease_cloud_music/pages/hotComment/HotCommentResp.dart';
 import 'package:net_ease_cloud_music/utils/NetUtil.dart';
 import 'package:net_ease_cloud_music/widget/IconBox.dart';
-import 'package:net_ease_cloud_music/widget/LoadingProgress.dart';
+import 'package:net_ease_cloud_music/widget/CloudLoadingProgress.dart';
 import 'package:net_ease_cloud_music/widget/NoDataPage.dart';
 
 class HotCommentMain extends StatefulWidget {
@@ -59,11 +59,11 @@ class _HotCommentMainState extends State<HotCommentMain>
               }
             case ConnectionState.waiting:
               {
-                return LoadingProgress();
+                return CloudLoadingProgress();
               }
             case ConnectionState.active:
               {
-                return LoadingProgress();
+                return CloudLoadingProgress();
               }
             case ConnectionState.done:
               {

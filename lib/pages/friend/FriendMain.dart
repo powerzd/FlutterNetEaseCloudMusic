@@ -11,8 +11,7 @@ import 'package:net_ease_cloud_music/utils/MutipleRequestUtil.dart';
 import 'package:net_ease_cloud_music/utils/NetUtil.dart';
 import 'package:net_ease_cloud_music/utils/RequestMethod.dart';
 import 'package:net_ease_cloud_music/utils/SpUtil.dart';
-import 'package:net_ease_cloud_music/widget/FutureBuilderBox.dart';
-import 'package:net_ease_cloud_music/widget/LoadingProgress.dart';
+import 'package:net_ease_cloud_music/widget/CloudLoadingProgress.dart';
 import 'package:net_ease_cloud_music/widget/NoDataPage.dart';
 
 class FriendMain extends StatefulWidget{
@@ -62,11 +61,11 @@ class _FriendMainState extends State<FriendMain> with SingleTickerProviderStateM
                 }
               case ConnectionState.waiting:
                 {
-                  return LoadingProgress();
+                  return CloudLoadingProgress();
                 }
               case ConnectionState.active:
                 {
-                  return LoadingProgress();
+                  return CloudLoadingProgress();
                 }
               case ConnectionState.done:
                 {

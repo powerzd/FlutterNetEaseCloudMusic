@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:net_ease_cloud_music/base/baseColor.dart';
+import 'package:net_ease_cloud_music/pages/daily/DailyRecommend.dart';
 import 'package:net_ease_cloud_music/pages/friend/FriendMain.dart';
 import 'package:net_ease_cloud_music/pages/hotComment/HotCommentMain.dart';
 import 'package:net_ease_cloud_music/pages/login/LoginEmailMain.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         "friend":(context) => FriendMain(),
         "loginEmail":(context) => LoginEmailMain(),
         "userDetail":(context) => UserDetailMain(),
+        "dailyRecommend":(context) => DailyRecommend(),
       },
     );
   }

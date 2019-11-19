@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 const Color colorBase = Color(0xffff3A3A);
+const Color colorRecommend = Color(0xffff5a4c);
 const Color colorWhite = Color(0xffffffff);
 const Color colorBlack = Color(0xff000000);
 const Color colorText = Color(0xff333333);

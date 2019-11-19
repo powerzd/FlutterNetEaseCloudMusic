@@ -1,26 +1,36 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/dio.dart' as prefix0;
 import 'package:flutter/cupertino.dart';
 import 'package:net_ease_cloud_music/base/baseConstant.dart';
 import 'package:net_ease_cloud_music/utils/MutipleRequestUtil.dart';
 import 'package:net_ease_cloud_music/utils/RequestMethod.dart';
+import 'package:path_provider/path_provider.dart';
 
 class NetUtil{
   static final NetUtil _singleton = NetUtil.init();
   Dio dio;
+  static var cookieJar;
 
   BaseOptions _options = new BaseOptions(
     connectTimeout: 5000,
     receiveTimeout: 5000,
+    followRedirects: false,
   );
 
-  Options options = Options(headers: {HttpHeaders.acceptHeader:"accept: application/json"});
+  Options options = Options(headers: {HttpHeaders.acceptHeader:"accept: application/json",});
+
+  static initCookie() async{
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+    String appDocPath = appDocDir.path;
+    cookieJar=PersistCookieJar(dir:appDocPath+"/.cookies/");
+  }
 
   NetUtil.init(){
-    dio = Dio(_options);
+    dio = Dio(_options)..interceptors.add(CookieManager(cookieJar));
   }
 
   factory NetUtil(){
@@ -93,8 +103,8 @@ class NetUtil{
         print("e.response.request is ${e.response.request}");
       } else{
         // Something happened in setting up or sending the request that triggered an Error
-        print("e.request is ${e.request}");
         print("e.message is ${e.message}");
+        print("error is ${e.error}");
       }
     }
     List<Response> response = await Future.wait(futures,eagerError: true);
